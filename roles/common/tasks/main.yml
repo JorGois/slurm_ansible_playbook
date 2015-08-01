@@ -1,0 +1,22 @@
+---
+- name: "Install the dependencies"
+  yum: "name={{ item }} state=latest"
+  with_items:
+    - epel-release
+    - rpm-build
+    - redhat-rpm-config
+    - asciidoc
+    - hmaccalc
+    - perl-ExtUtils-Embed
+    - xmlto
+    - audit-libs-devel
+    - binutils-devel
+    - elfutils-devel
+    - elfutils-libelf-devel
+    - newt-devel
+    - python-devel
+    - zlib-devel
+    - openssl-devel
+    - gcc
+    - kernel-devel
+    - git

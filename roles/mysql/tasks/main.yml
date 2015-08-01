@@ -1,0 +1,16 @@
+---
+- shell: "rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
+
+- name: Install mysql-community-server
+  yum: name=mysql-community-server state=present
+
+# Start service munge, if not running
+- service: name=mysql state=restarted
+
+# Create database and tables
+- shell: mysql -u root -e "create database slurm_acct_db;"
+- shell: mysql -u root -e "CREATE USER 'slurm'@'localhost';"
+- shell: mysql -u root -e "grant usage on *.* to 'slurm'@'localhost';"
+- shell: mysql -u root -e "set password for 'slurm'@'localhost' = password('sec')"
+- shell: mysql -u root -e "grant all privileges on slurm_acct_db.* to 'slurm'@'localhost';"
+- shell: mysql -u root -e "flush privileges;"

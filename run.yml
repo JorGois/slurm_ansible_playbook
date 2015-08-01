@@ -1,0 +1,10 @@
+---
+# This Playbook would deploy the whole slurm heade controler and nodes cluster.
+
+- hosts: all
+  roles:
+   - common
+   - munge
+   - blcr
+   - mysql
+   - slurm
