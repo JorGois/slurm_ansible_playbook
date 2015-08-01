@@ -1,0 +1,15 @@
+---
+#- name: Create a dir
+#  shell: mkdir ~/downloads/configgenerate/
+
+ - name: Copy script to HC
+   copy: src={{ item }} dest=/usr/local/etc/{{ item }} owner=root group=root mode=0777
+   with_items:
+     - slurmdbd.conf
+     - slurm.conf
+
+- name: Add cluster to sacctmgr
+  shell: "/usr/local/bin/sacctmgr -i add cluster cluster"
+
+- name: Start service slurmcld, if not running
+  service: name=slurmcld state=restarted

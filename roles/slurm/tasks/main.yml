@@ -1,10 +1,15 @@
 ---
+# https://github.com/SchedMD/slurm.git
+# https://github.com/JorGois/slurm.git
+
 - name: Git clone
-  git: repo=https://github.com/SchedMD/slurm.git
+  git: repo=https://github.com/JorGois/slurm.git
        dest=~/downloads/slurm
+       version=slurm-14.11
 
 - name: Configure Instalation
-  shell: "cd ~/downloads/slurm && ./configure --with-mysql_config=/usr/local/bin"
+  #shell: "cd ~/downloads/slurm && ./configure --with-mysql_config=/usr/bin " # --with-munge=/usr/sbin/"
+  shell: "cd ~/downloads/slurm && ./configure --prefix=/usr --sysconfdir=/etc/sysconfig/slurm --with-mysql_config=/usr/local/bin"
 
 - name: Make
   shell: "cd ~/downloads/slurm && make"

@@ -1,5 +1,5 @@
 ---
-- name: "Install the dependencies"
+- name: "Install project dependencies"
   yum: "name={{ item }} state=latest"
   with_items:
     - epel-release
@@ -20,3 +20,6 @@
     - gcc
     - kernel-devel
     - git
+
+- name: Create dirs
+  shell: mkdir ~/downloads/ && mkdir /var/log/slurm/  &&  mkdir /etc/slurm
