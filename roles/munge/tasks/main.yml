@@ -2,23 +2,19 @@
 - name: Install munge
   yum: name=munge state=present
 
-# Grab some pseudorandom data (recommended for the impatient)
-- shell: dd if=/dev/urandom bs=1 count=1024 >/etc/munge/munge.key
+- name: Grab some pseudorandom data (recommended for the impatient)
+  shell: dd if=/dev/urandom bs=1 count=1024 >/etc/munge/munge.key
 
-# Change premisions
-#chmod -R 0700 /etc/munge/
-#chmod -R 0711 /var/lib/munge/
-#chmod -R 0700 /var/log/munge/
-#chmod -R 0755 /var/run/munge/
-- file: path=/etc/munge/ owner=munge group=munge recurse=yes state=directory mode=0700
-- file: path=/var/lib/munge/ owner=munge group=munge recurse=yes state=directory mode=0711
-- file: path=/var/log/munge/ owner=munge group=munge recurse=yes state=directory mode=0700
-- file: path=/var/run/munge/ owner=munge group=munge recurse=yes state=directory mode=0755
+- name: Change premisions
+  file: path=/etc/munge/ owner=munge group=munge recurse=yes state=directory mode=0700
+  file: path=/var/lib/munge/ owner=munge group=munge recurse=yes state=directory mode=0711
+  file: path=/var/log/munge/ owner=munge group=munge recurse=yes state=directory mode=0700
+  file: path=/var/run/munge/ owner=munge group=munge recurse=yes state=directory mode=0755
 
 
-# Start service munge, if not running
-- service: name=munge state=restarted
+- name: Start service munge, if not running
+  service: name=munge state=restarted
 
 
-# some teste
-- shell: munge -n | unmunge
+- name: Teste
+  shell: munge -n | unmunge

@@ -3,11 +3,9 @@
   git: repo=https://github.com/SchedMD/slurm.git
        dest=~/downloads/slurm
 
-# configure instalation
 - name: Configure Instalation
   shell: "cd ~/downloads/slurm && ./configure --with-mysql_config=/usr/local/bin"
 
-# Install
 - name: Make
   shell: "cd ~/downloads/slurm && make"
 
