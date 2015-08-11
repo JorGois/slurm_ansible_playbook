@@ -1,0 +1,14 @@
+---
+- name: Git clone Docker File to Host
+  git: repo=https://github.com/JorGois/docker_centos7_with_ssh.git
+       dest=/tmp
+
+- name: "Build the image"
+  command: "docker build -t=jgois/docker_centos7_with_ssh"
+
+- name: "Run the docker container"
+  command: "docker run -d -P -p 0.0.0.0:{{ item }}:22 -t -i jgois/docker_centos7_with_ssh"
+  with_items:
+     - "2222"
+     - "2223"
+     - "2224"
