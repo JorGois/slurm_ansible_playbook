@@ -1,7 +1,7 @@
 Features:
 
   * Create only to run on Centos 7.1,
-  * Install Slurm 15.0 (Last release),
+  * Install Slurm 15.0.8 (Last release),
   * Install Slurm controler, nodes,
   * Using Mysql accounting on Slurm Controler.
 
@@ -54,7 +54,7 @@ $ ansible-playbook -v -i hosts ./run.yml -u root -e "host=nodes" -K -k
 
 Deploy configuration
 ==============
-First you need set your Slurm.config and slurmdbd.com on /roles/hc/files (can use the templates available), and the config to the nodes on /roles/nodes/files/configgenerate/slurm.template.
+First you need set your Slurm.conf.j2 and slurmdbd.conf.j2 on /roles/hc/templates (can use the templates available), and the config to the nodes on /roles/nodes/templates/Slurm.conf.j2.
 
 ```
 $ ansible-playbook -v -i hosts ./deployconfigs.yml -u root -e "host=all" -K -k
@@ -66,7 +66,7 @@ Check status of slurm
 ==============
 
 ```
-$ ansible-playbook -v -i hosts all -u root -m shell -a "ps -faux | grep slurm" -K -k
+$ ansible -i hosts all -u root -m shell -a "ps -faux | grep slurm"
 ```
 
 

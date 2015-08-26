@@ -32,7 +32,7 @@
   yum: "name={{ item }} state=latest"
   with_items:
     - kernel
-    - kernel-devel-3.10.0-229.11.1.el
+    - kernel-devel-3.10.0-229.11.1.el7
 
 - name: Create dirs
   shell: mkdir ~/downloads/ && mkdir /var/log/slurm/ && mkdir /var/spool/slurmd &&  mkdir /etc/slurm && mkdir ~/downloads/configgenerate && mkdir /etc/sysconfig/slurm/
