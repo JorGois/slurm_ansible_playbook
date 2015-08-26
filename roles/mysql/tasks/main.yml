@@ -1,19 +1,31 @@
 ---
-- shell: "rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
 
-- name: Install mysql-community-server
+- name: "[1 - 9] Downloads Repo mysql-community-release-el7"
+  shell: "rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
+
+- name: "[2 - 9] Install mysql-community-server"
   yum: name={{ item }} state=present
   with_items:
    - mysql-community-server
    - mysql-community-devel
 
-- name: Start service munge, if not running
+- name: "[3 - 9] Start service munge, if not running"
   service: name=mysql state=restarted
 
-- name: Create database and tables
-  shell: mysql -u root -e "create database slurm_acct_db;"
+- name: "[4 - 9] Create database and tables"
+  shell: 'mysql -u root -e "create database slurm_acct_db;"'
+
+- name: "[5 - 9] Create user"
   shell: mysql -u root -e "CREATE USER 'slurm'@'localhost';"
+
+- name: "[6 - 9] Grant usage"
   shell: mysql -u root -e "grant usage on *.* to 'slurm'@'localhost';"
+
+- name: "[7 - 9] Set password"
   shell: mysql -u root -e "set password for 'slurm'@'localhost' = password('isec')"
+
+- name: "[8 - 9] grant all privileges"
   shell: mysql -u root -e "grant all privileges on slurm_acct_db.* to 'slurm'@'localhost';"
+
+- name: "[9 - 9] Create user"
   shell: mysql -u root -e "flush privileges;"

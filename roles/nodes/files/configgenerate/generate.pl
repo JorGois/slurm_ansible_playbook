@@ -44,20 +44,20 @@ foreach $key (sort((keys %subs))) {
 
   if ($key eq '%hostname%'){
     $host = `hostname -s`;
-    #chomp($host);
+    chomp($host);
     $subs{$key}=$host;
   }elsif ($key eq '%cpu%'){
     $cpu = 1;#qx(less /proc/cpuinfo | grep -c processor);
-    #chomp($cpu);
+    chomp($cpu);
     $subs{$key}=$cpu;
 
   }elsif ($key eq '%ram%'){
     $ram = 1;#qx(free -m | grep Mem | cut -b 5-24 | xargs);
-    #chomp($ram);
+    chomp($ram);
     $subs{$key}=$ram;
   }elsif ($key eq '%ip%'){
 	 $ip = 1;#qx(ifconfig | grep "inet addr:192" | cut -c 21-32);
-    #chomp($ip);
+    chomp($ip);
     $subs{$key}=$ip;
   }
 print "$key ($subs{$key})";

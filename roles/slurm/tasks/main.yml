@@ -2,17 +2,25 @@
 # https://github.com/SchedMD/slurm.git
 # https://github.com/JorGois/slurm.git
 
-- name: Git clone
+- name: "[1 - 5] Git clone"
   git: repo=https://github.com/JorGois/slurm.git
        dest=~/downloads/slurm
-       version=slurm-14.11
 
-- name: Configure Instalation
+- name: "[2 - 5] Copy systemd files"
+  copy: src=systemd/{{ item }} dest=/usr/lib/systemd/system/{{ item }} owner=root group=root mode=0744
+  with_items:
+   - slurmdbd.service
+   - slurmd.service
+   - slurmctld.service
+
+- name: "[3 - 5] Configure Instalation"
   #shell: "cd ~/downloads/slurm && ./configure --with-mysql_config=/usr/bin " # --with-munge=/usr/sbin/"
-  shell: "cd ~/downloads/slurm && ./configure --prefix=/usr --sysconfdir=/etc/sysconfig/slurm --with-mysql_config=/usr/local/bin"
+  shell: "cd ~/downloads/slurm && ./configure --prefix=/usr --sysconfdir=/etc/sysconfig/slurm "
+# --with-mysql_config=/usr/local/bin
 
-- name: Make
+
+- name: "[4 - 5] Make"
   shell: "cd ~/downloads/slurm && make"
 
-- name: Make Install
+- name: "[5 - 5] Make Install"
   shell: "cd ~/downloads/slurm && make install"

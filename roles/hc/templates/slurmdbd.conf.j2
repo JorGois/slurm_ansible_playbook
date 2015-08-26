@@ -11,7 +11,7 @@ AuthInfo=/var/run/munge/munge.socket.2
 #
 # slurmDBD info
 DbdAddr=127.0.0.1
-DbdHost=JGHCSLURM
+DbdHost={{ ansible_hostname }}
 DbdPort=6819
 #DbdPort=7031
 SlurmUser=root
@@ -20,7 +20,7 @@ DebugLevel=4
 #DefaultQOS=normal,standby
 LogFile=/var/log/slurm/slurmdbd.log
 PidFile=/var/run/slurmdbd.pid
-PluginDir=/usr/local/lib/slurm
+PluginDir=/usr/lib/slurm/
 #PrivateData=accounts,users,usage,jobs
 #TrackWCKey=yes
 #

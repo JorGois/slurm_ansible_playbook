@@ -1,17 +1,17 @@
 ---
 # More information of BLCR on: http://crd.lbl.gov/departments/computer-science/CLaSS/research/BLCR/#toc-anchor-4
 
- - name: download file from BLCR repo
+ - name: "[1 - 5] download file from BLCR repo"
    get_url: url=https://upc-bugs.lbl.gov/blcr-dist/blcr-0.8.6_b4.tar.gz dest=~/downloads/
 
- - name: unTar
+ - name: "[2 - 5] unTar"
    shell: cd ~/downloads/ && tar -xvf ~/downloads/blcr-0.8.6_b4.tar.gz
 
- - name: Configure instalation
-   shell: "cd ~/downloads/blcr-0.8.6_b4 && ./configure "
+ - name: "[3 - 5] Configure instalation"
+   shell: "cd ~/downloads/blcr-0.8.6_b4 && ./configure CC='gcc -m64' --with-linux=/usr/src/kernels/3.10.0-229.11.1.el7.x86_64/"
 
- - name: Make
+ - name: "[4 - 5] Make"
    shell: "cd ~/downloads/blcr-0.8.6_b4 && make"
 
- - name: Make Install
+ - name: "[5 - 5] Make Install"
    shell: "cd ~/downloads/blcr-0.8.6_b4 && make install"

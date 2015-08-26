@@ -1,21 +1,17 @@
 ---
-#- name: Create a dir
-#  shell: mkdir ~/downloads/configgenerate/
 
-- name: Copy script to HC
-  copy: src=configgenerate/{{ item }} dest=~/downloads/configgenerate/{{ item }} owner=root group=root mode=0744
-  with_items:
-   - generate.pl
-   - slurm.template
+# - name: Copy script to HC
+#   copy: src=configgenerate/{{ item }} dest=~/downloads/configgenerate/{{ item }} owner=root group=root mode=0744
+#   with_items:
+#    - conf
+#    - generate.pl
+#    - slurm.template
 
-- name: Create a config file on /usr/local/etc/slurm.conf
-  shell: cd ~/downloads/configgenerate/ && ./generate.pl slurm.template /usr/local/etc/slurm.conf
+- name: slurm template config to destination
+  template: src=slurm.conf.j2 dest=/etc/sysconfig/slurm/slurm.conf
 
-# - name: Configure Instalation
-#   shell: "cd ~/downloads/slurm && ./configure --with-mysql_config=/usr/local/bin"
-#
-# - name: Make
-#   shell: "cd ~/downloads/slurm && make"
-#
-# - name: Make Install
-#   shell: "cd ~/downloads/slurm && make install"
+# - name: Create a config file on /usr/local/etc/slurm.conf
+#   shell: cd ~/downloads/configgenerate/ && ./generate.pl slurm.template /etc/sysconfig/slurm/slurm.conf
+
+- name: Restarted service slurmd
+  service: name=slurmd state=restarted

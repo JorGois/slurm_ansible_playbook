@@ -3,7 +3,7 @@
 # See the slurm.conf man page for more information.
 #
 
-ControlMachine=%hostname%
+ControlMachine=HC
 
 AuthType=auth/munge
 CryptoType=crypto/munge
@@ -66,7 +66,7 @@ SlurmdDebug=3
 # DebugFlags=NO_CONF_HASH
 
 # COMPUTE NODES
-NodeName=%hostname% RealMemory=%ram% NodeAddr=%ip% State=UNKNOWN
+NodeName={{ansible_hostname}} RealMemory={{ansible_memory_mb.real.total}} NodeAddr={{ansible_lo.ipv4.address}} State=UNKNOWN
 
 #PartitionName=debug Nodes=linux[1-32] Default=YES MaxTime=INFINITE State=UP
 #NodeName=%hostname% CPUs=%cpu% RealMemory=%ram% NodeAddr=%ip% State=UNKNOWN

@@ -1,26 +1,28 @@
 ---
 # https://munge.googlecode.com/files/munge-0.5.11.tar.bz2
 
-- name: Install munge
+- name: "[1 - 5] Install munge"
   yum: name={{ item }} state=present
   with_items:
     - munge
     - munge-devel
 
-- name: create-munge-key on /etc/munge/munge.key
-  shell: create-munge-key
+# - name: create-munge-key on /etc/munge/munge.key
+#  shell: create-munge-key
 #  shell: dd if=/dev/urandom bs=1 count=1024 >/etc/munge/munge.key
 
-- name: Change premisions
+- name: "[2 - 5] Change premisions"
   file: path=/etc/munge/ owner=munge group=munge recurse=yes state=directory mode=0700
   file: path=/var/lib/munge/ owner=munge group=munge recurse=yes state=directory mode=0711
   file: path=/var/log/munge/ owner=munge group=munge recurse=yes state=directory mode=0700
   file: path=/var/run/munge/ owner=munge group=munge recurse=yes state=directory mode=0755
 
+- name: "[3 - 5] Copy from local to hosts the munge.key"
+  copy: src=/tmp/munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0600
 
-- name: Start service munge, if not running
+- name: "[4 - 5] Start service munge, if not running"
   service: name=munge state=restarted
 
 
-- name: Teste
+- name: "[5 - 5] Teste"
   shell: munge -n | unmunge

@@ -1,4 +1,4 @@
-ControlMachine=JGHCSLURM
+ControlMachine={{ ansible_hostname }}
 
 AuthType=auth/munge
 
@@ -23,11 +23,11 @@ SlurmctldPidFile=/var/run/slurmctld.pid
 SlurmctldPort=6817
 SlurmdPidFile=/var/run/slurmd.pid
 SlurmdPort=6818
-SlurmdSpoolDir=/tmp/slurmd
 SlurmUser=root
 
 StateSaveLocation=/var/spool
 SlurmdSpoolDir=/var/spool/slurmd
+#SlurmdSpoolDir=/tmp/slurmd
 SwitchType=switch/none
 ClusterName=cluster
 

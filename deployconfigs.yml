@@ -3,15 +3,8 @@
 
 - hosts: HC
   roles:
-   - common
-   - mysql
-   - blcr
-   - munge
-   - slurm
+   - hc
 
 - hosts: nodes
   roles:
-   - common
-   - blcr
-   - munge
-   - slurm
+   - nodes

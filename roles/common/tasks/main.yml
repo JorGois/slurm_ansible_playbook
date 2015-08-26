@@ -1,5 +1,5 @@
 ---
-- name: "Install project dependencies"
+- name: "Install 1 - 5 dependencies"
   yum: "name={{ item }} state=latest"
   with_items:
     - epel-release
@@ -7,19 +7,32 @@
     - redhat-rpm-config
     - asciidoc
     - hmaccalc
+
+- name: "Install 6 - 10 dependencies"
+  yum: "name={{ item }} state=latest"
+  with_items:
     - perl-ExtUtils-Embed
     - xmlto
     - audit-libs-devel
     - binutils-devel
     - elfutils-devel
+
+- name: "Install 11 - 17 dependencies"
+  yum: "name={{ item }} state=latest"
+  with_items:
     - elfutils-libelf-devel
     - newt-devel
     - python-devel
     - zlib-devel
     - openssl-devel
     - gcc
-    - kernel-devel
     - git
 
+- name: "Install 2 kernel dependencies"
+  yum: "name={{ item }} state=latest"
+  with_items:
+    - kernel
+    - kernel-devel-3.10.0-229.11.1.el
+
 - name: Create dirs
-  shell: mkdir ~/downloads/ && mkdir /var/log/slurm/  &&  mkdir /etc/slurm
+  shell: mkdir ~/downloads/ && mkdir /var/log/slurm/ && mkdir /var/spool/slurmd &&  mkdir /etc/slurm && mkdir ~/downloads/configgenerate && mkdir /etc/sysconfig/slurm/
