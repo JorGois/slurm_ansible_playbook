@@ -40,13 +40,13 @@ node[1:3].example.com
 dd if=/dev/urandom bs=1 count=1024 > /tmp/munge.key
 ```
 
-### After run on HC node
+### Run on HC node
 
 ```
 $ ansible-playbook -v -i hosts ./run.yml -u root -e "host=HC" -K -k
 ```
 
-### After that run on nodes
+### Run on nodes
 
 ```
 $ ansible-playbook -v -i hosts ./run.yml -u root -e "host=nodes" -K -k

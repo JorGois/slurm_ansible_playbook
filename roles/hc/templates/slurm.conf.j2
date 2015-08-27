@@ -1,14 +1,18 @@
+##############################################################
+#			READ MORE: http://slurm.schedmd.com/slurm.conf.html
+#
+#
+##############################################################
+
 ControlMachine={{ ansible_hostname }}
+ClusterName=cluster
 
 AuthType=auth/munge
 
 CryptoType=crypto/munge
 
-#CryptoType=crypto/openssl
-#JobCredentialPrivateKey=/etc/slurm/slurm.key
-#JobCredentialPublicCertificate=/etc/slurm/slurm.cert
-
 MpiDefault=none
+CheckpointType=checkpoint/blcr
 
 ProctrackType=proctrack/pgid
 
@@ -27,9 +31,7 @@ SlurmUser=root
 
 StateSaveLocation=/var/spool
 SlurmdSpoolDir=/var/spool/slurmd
-#SlurmdSpoolDir=/tmp/slurmd
 SwitchType=switch/none
-ClusterName=cluster
 
 InactiveLimit=0
 KillWait=30
