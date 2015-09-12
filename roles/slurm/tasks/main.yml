@@ -3,8 +3,9 @@
 # https://github.com/JorGois/slurm.git
 
 - name: "[1 - 5] Git clone"
-  git: repo=https://github.com/JorGois/slurm.git
+  git: repo=https://github.com/SchedMD/slurm.git
        dest=~/downloads/slurm
+       version=slurm-15.08
 
 - name: "[2 - 5] Copy systemd files"
   copy: src=systemd/{{ item }} dest=/usr/lib/systemd/system/{{ item }} owner=root group=root mode=0744
